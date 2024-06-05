@@ -8,24 +8,40 @@ from datetime import datetime,timedelta
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 import json
+import csv
+from django.http import HttpResponse
+from .models import NPK_Experimentales, NPK_Teoricos
 # from .models import SensorData
 
+def download_data(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="datos.csv"'
 
-#Variables Globales
+    writer = csv.writer(response)
+    writer.writerow(['Nro', 'V_teo_1', 'V_teo_2', 'V_teo_3', 'Fecha', 'Valid'])
 
+    for obj in NPK_Experimentales.objects.filter(Valid=True):
+        writer.writerow([obj.Nro, obj.V_teo_1, obj.V_teo_2, obj.V_teo_3, obj.Fecha, obj.Valid, 'Experimental'])
+    
+    for obj in NPK_Teoricos.objects.filter(Valid=True):
+        writer.writerow([obj.Nro, obj.V_teo_1, obj.V_teo_2, obj.V_teo_3, obj.Fecha, obj.Valid, 'Teórico'])
+    return response
 
 
 
 def index(request):
-    return render(request,'index.html',{
-        'message':'Listado de productos',
-        'title' :'Productos',
-        'products':[
-            {'title': 'Playera','price':5,'stock':True}, #producto
-            {'title': 'Camisa','price':7,'stock':True}, #producto
-            {'title': 'Mochila','price':20,'stock':False}, #producto
-        ]
-    })
+    return render(request,'index.html')
+
+def data(request):
+    return render(request, 'get_data.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
+def about(request):
+    return render(request, 'about.html')
+def visualizacion(request):
+    return render(request, 'visualizacion.html')
 
 def login_view(request):
     if request.method == 'POST':

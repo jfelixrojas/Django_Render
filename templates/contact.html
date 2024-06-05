@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contáctanos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href=" {% static 'css/styles.css' %} ">
+    <meta name="csrf-token" content="{% csrf_token %}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        h3 {
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+        }
+
+        h1, h5 {
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+        }
+
+        input {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        label {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        .small-input {
+            width: 4cm;
+        }
+
+        .small-btn {
+            width: 2cm; /* Ajusta el tamaño para que los botones sean iguales */
+        }
+
+        .full-btn {
+            width: 4cm;
+            box-sizing: border-box;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem !important;
+        }
+
+        .status-box {
+            padding: 0.5rem;
+            color: #fff;
+            border-radius: 0.25rem;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .contador {
+            font-weight: bold;
+            font-size: 1.2em; /* Puedes ajustar este valor según tu preferencia */
+        }
+
+        .header {
+            background-color: #e4c9c9;
+            color: #fff;
+            padding: 5px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Adjust as needed */
+        }
+
+        .header h1 {
+            margin: 0;
+            color: rgb(128, 12, 237);
+        }
+
+        .header nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+        }
+
+        .header nav ul li {
+            margin-right: 10px;
+        }
+
+        .header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+
+        .header nav ul li a:hover {
+            background-color: #e68484;
+            border-radius: 5px; /* Bordes redondeados */
+        }
+
+        .content {
+            margin: 200px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1><a href="/">Aplicación IOT</a></h1>
+        <nav>
+            <ul class="bruh">
+                <li><a href="/" class="link">Inicio</a></li>
+                <li><a href="/data" class="link">Toma de datos</a></li>
+                <li><a href="/visualizacion" class="link">Visualización</a></li>
+                <li><a href="/contact" class="link">Contáctanos</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="content">
+
+        <p>
+            Para cualquier consulta no dudes en ponerte en contacto con nosotros:
+        </p>
+        <p>
+            Desarrollado por Joan Sebastian <br>
+            <a href="https://github.com/sebastian408">
+                github.com/joansebastian 
+            </a> <br>
+            Y José Félix Rojas <br>
+            <a href="https://github.com/jfelixrojas">
+                github.com/josefelix
+        </p>
+
+    
+    </div>
+    
+</body>
+
+</html>

@@ -1,0 +1,344 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización de datos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href=" {% static 'css/styles.css' %} ">
+    <meta name="csrf-token" content="{% csrf_token %}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        h3 {
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+        }
+
+        h1, h5 {
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+        }
+
+        input {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        label {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        .small-input {
+            width: 4cm;
+        }
+
+        .small-btn {
+            width: 2cm; /* Ajusta el tamaño para que los botones sean iguales */
+        }
+
+        .full-btn {
+            width: 4cm;
+            box-sizing: border-box;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem !important;
+        }
+
+        .status-box {
+            padding: 0.5rem;
+            color: #fff;
+            border-radius: 0.25rem;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .contador {
+            font-weight: bold;
+            font-size: 1.2em; /* Puedes ajustar este valor según tu preferencia */
+        }
+
+        .header {
+            background-color: #e4c9c9;
+            color: #fff;
+            padding: 5px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Adjust as needed */
+        }
+
+        .header h1 {
+            margin: 0;
+            color: rgb(128, 12, 237);
+        }
+
+        .header nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+        }
+
+        .header nav ul li {
+            margin-right: 10px;
+        }
+
+        .header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+
+        .header nav ul li a:hover {
+            background-color: #e68484;
+            border-radius: 5px; /* Bordes redondeados */
+        }
+
+        .content {
+            max-width: 880px;
+            margin: 90px auto;
+            
+            padding: 20px;
+            background-color: #e2dbdb;
+            border: 2px solid #ccc;
+        }
+
+        .content h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .content h3 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Estilos del Formulario */
+        .form-container {
+            display: flex;
+            flex-flow: column;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .form {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 0px;
+            padding: 10px 0px; 
+            justify-content: space-between;  
+            align-items: center; 
+        }
+
+        /* Estilos de la Tabla */
+        .table-container {
+            background: rgba(86, 86, 86, 0.2);
+            margin: 30px auto;
+            border: 5px solid rgba(96, 96, 96);
+            border-radius: 10px;
+            max-width: 60%;
+            height: 350px;
+            overflow: scroll; 
+        }
+
+        .table {
+            background: rgba(0, 0, 0, 0.2);
+            width: 80%;
+            border-collapse: collapse;
+            border: 2px solid #888;
+            margin: 50px auto;
+        }
+
+        .table th, .table td {
+            border: 1.5px solid #888;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Estilos del Gráfico */
+        .chart-container {
+            background: rgba(86, 86, 86, 0.2);
+            border: 5px solid rgba(96, 96, 96);
+            border-radius: 10px;
+            margin: 25px auto;
+            padding: 10px;
+            max-width: 60%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1><a href="/">Aplicación IOT</a></h1>
+        <nav>
+            <ul class="bruh">
+                <li><a href="/" class="link">Inicio</a></li>
+                <li><a href="/data" class="link">Toma de datos</a></li>
+                <li><a href="/visualizacion" class="link">Visualización</a></li>
+                <li><a href="/contact" class="link">Contáctanos</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="content">
+        <h2>Visualización de datos</h2>
+    </div>
+    
+    <div class="content">
+
+        <!-- Formulario -->
+        <div class="form-container">
+            <form class="form">
+                <label for="Nitrogeno">Nitrogeno: </label>
+                <input type="text" list="Nitrogeno-list" id="Nitrogeno">
+                <datalist id="Nitrogeno-list">
+                    <option value="all">
+                </datalist>
+                
+                <label for="order">Order by: </label>
+                <input type="text" list="order-list" id="order">
+                <datalist id="order-list">
+                    <option value="date">
+                    <option value="phosphorus">
+                    <option value="potasium">
+                </datalist>
+
+                <label for="limit">Limit: </label>
+                <input type="number" name="limit" id="limit" min="0">
+
+                <label for="sort-dir">Sort-dir:</label>
+                <input type="checkbox" name="sort_dir" id="sort-dir">
+                <button>Apply</button>
+            </form>
+        </div>
+
+        <!-- Tabla de datos-->
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        
+                        <th>Nitrógeno</th>
+                        <th>Fósforo</th>
+                        <th>Potasio</th>
+                        <th>Fecha</th>
+                    </tr>
+
+                    <tr>
+                        <td>30</td>
+                        <td>25</td>
+                        <td>34</td>
+                        <td>2024-06-02</td>
+                    </tr>
+                    <tr>
+                        <td>35</td>
+                        <td>28</td>
+                        <td>39</td>
+                        <td>2024-06-02</td>
+                    </tr>
+                    <!-- Nuevas filas con datos adicionales -->
+                    <tr>
+                        <td>28</td>
+                        <td>32</td>
+                        <td>31</td>
+                        <td>2024-06-02</td>
+                    </tr>
+                    <tr>
+                        <td>31</td>
+                        <td>27</td>
+                        <td>36</td>
+                        <td>2024-06-02</td>
+                    </tr>
+                    <tr>
+                        <td>33</td>
+                        <td>30</td>
+                        <td>37</td>
+                        <td>2024-06-02</td>
+                    </tr>
+                    <tr>
+                        <td>29</td>
+                        <td>26</td>
+                        <td>33</td>
+                        <td>2024-06-02</td>
+                    </tr>
+                    <tr>
+                        <td>36</td>
+                        <td>31</td>
+                        <td>40</td>
+                        <td>2024-06-02</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Gráficos -->
+        <div class="chart-container">
+            <!-- Contenido de tu gráfico aquí (puedes usar un elemento <canvas> si usas Chart.js) -->
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2024-06-01', '2024-06-02', '2024-06-03'], // Ejemplo de datos
+                datasets: [
+                    {
+                        label: 'Nitrogeno',
+                        data: [30, 25, 40],
+                        backgroundColor: 'rgba(53, 162, 235, 0.3)',
+                        fill: true
+                    },
+                    {
+                        label: 'Phosphorus',
+                        data: [15, 20, 18],
+                        backgroundColor: 'rgba(255, 99, 132, 0.3)',
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'IoT Data'
+                    },
+                    legend: {
+                        display: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

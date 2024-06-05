@@ -1,38 +1,170 @@
 {% load static %}
-<!doctype html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>{{title}}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href=" {% static 'css/styles.css' %} ">
+    <meta name="csrf-token" content="{% csrf_token %}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        h3,h2 {
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+        }
+
+        h1, h5 {
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+        }
+
+        label {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        .status-box {
+            padding: 0.5rem;
+            color: #fff;
+            border-radius: 0.25rem;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .contador {
+            font-weight: bold;
+            font-size: 1.2em; /* Puedes ajustar este valor según tu preferencia */
+        }
+
+        .header {
+            background-color: #e4c9c9;
+            color: #fff;
+            padding: 5px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Adjust as needed */
+        }
+
+        .header h1 {
+            margin: 0;
+            color: rgb(128, 12, 237);
+        }
+
+        .header nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+        }
+
+        .header nav ul li {
+            margin-right: 10px;
+        }
+
+        .header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+
+        .header nav ul li a:hover {
+            background-color: #e68484;
+            border-radius: 5px; /* Bordes redondeados */
+        }
+
+        .content {
+            margin-top: 80px; /* Ajusta este valor según el alto de tu header */
+            margin-left: 50px; /* Ajusta este valor según el ancho de tu header */
+            margin-right: 50px;
+        }
+
+        .content p {
+            text-align: justify;
+        }
+        .styled-image {
+        width: 500px; /* Ancho de la imagen */
+        height: auto; /* Altura automática para mantener la proporción */
+        border: 2px solid #ccc; /* Borde */
+        border-radius: 5px; /* Bordes redondeados */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+        margin: 25px; /* Margen alrededor de la imagen */
+        margin-left: 150px;
+        margin-right: 150px;
+        margin-top: 50px;
+        }
+    </style>
 </head>
-  <body>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>{{message}}</h1>
-                <ul class="list-group">
-                    {% for product in products %}
-                    <li class="list-group-item">
-                        {{ product.title }}
-                            {% if product.stock %}
-                                <span class="text-success">Disponible</span>
-                            {% else %}
-                                <span class="text-danger">No Disponible</span>  
-                            {% endif %}
-                    </li>
-                    {% endfor %}
-                </ul>
-                <img src="{% static 'images/mochila.jpg' %}"
-            </div>
-        </div>
+
+<body>
+    <div class="header">
+        <h1><a href="/">Aplicación IOT</a></h1>
+        <nav>
+            <ul class="bruh">
+                <li><a href="/" class="link">Inicio</a></li>
+                <li><a href="/data" class="link">Toma de datos</a></li>
+                <li><a href="/visualizacion" class="link">Visualización</a></li>
+                <li><a href="/contact" class="link">Contáctanos</a></li>
+            </ul>
+        </nav>
     </div>
     
-  </body>
+    <div class="content">
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  
-  <script src="{% static 'js/main.js' %}"></script>
-  
+        <h2>Montaje experimental</h2>
+        <p>
+            Circuito implementado para la toma de datos
+        </p>
+        <img src="static/images/Circuito-2.jpeg" alt="Circuito" class="styled-image">
+
+        <h3>Resumen</h3>
+        <br>
+        <p>
+            ¿Que requiere un sistema de adquisición de datos? ¿Es muy complejo implementarlo? estas y 
+            otro tipo de preguntas se resuelven en este proyecto, el cual explica paso a paso como se conforma
+            un prototipo partiendo del hardware hasta el software, dando una explicación completa de lo que se 
+            requiere en cada sección, el porque se hace de esta forma en particular y la complejidad que pueda llegar
+            a tener un proyecto de esta índole, proponiendo una solución eficiente a la forma de tomar, organizar y administrar
+            la cantidad de datos que se pueden tomar. Por otra parte, esta solución tendrá inconvenientes que se plantearan con
+            detenimiento, ofreciendo soluciones que puedan sobrellevar las situaciones que se pueden dar sin perder de vista
+            los objetivos que se plantean para el proyecto en cuestión.
+        </p>
+        <br>
+
+        <h2>Introducción</h2>
+        <br>
+        <p>
+            Cada vez que un físico experimental va a tomar datos o a realizar algo relacionado con el tratamiento de datos, 
+            se enfrenta a tres problemas: tomar los datos, guardarlos y luego hacer el respectivo tratamiento. Estos problemas 
+            se pueden sobrellevar si no son demasiados datos o si se cuenta con algún tipo de apoyo, pero ¿es lo más eficiente? 
+            La respuesta es no. Lo más eficiente siempre será tomar los datos de forma electrónica y guardarlos en un sistema cuya 
+            organización este acorde a las necesidades.  de organización consuma tiempo, este mismo proceso será necesario en etapas 
+            posteriores de la investigación.
+
+            <br>
+            Aunque la problemática es bastante clara, generalmente la solución no es tan concreta y, en algunos casos, puede ser más
+            compleja que el problema que se pretende resolver. Para ello, es necesario tener en cuenta algunos factores a la hora de
+            decidir implementar un sistema de adquisición de datos. Por ejemplo, si se requiere tomar un tipo de dato 10 o 20 veces,
+            se puede tomar con papel y lápiz y no habrá mayor complicación. Sin embargo, al implementar un sistema de adquisición de
+            datos, se debe tener en cuenta qué se quiere medir, cómo se desea medir y cómo se desea almacenar los datos. Ahora bien,
+            si se trata de tomar 80 muestras de tres medidas con la fecha y hora en que se tomaron, puede llegar a ser conveniente 
+            la implementación de un sistema, ya que es relativamente sencilla la organización de los datos, donde en una tabla con 
+            los respectivos campos que se desean medir y un campo que sea representativo de cada muestra, para relacionar las 
+            diferentes muestras con los datos de la misma. 
+
+A su vez, un sistema de adquisición de datos tiene ventajas muy claras sobre los métodos tradicionales. Una vez implementado correctamente, puede tomar todos los datos que se requieran hasta que se acabe el espacio de la base de datos.De esta forma, se tiene un sistema bastante eficiente para administrar los datos, lo que implica la posibilidad de corregir y cambiar sin perder el orden. Por lo tanto, es una solución que se puede ampliar tanto como se necesite. Sin embargo, se debe tener presente el objetivo fundamental del problema, ya que modificar el sistema una vez implementado puede llegar a ser contraproducente dependiendo del tipo de cambio que se desea realizar. Por ello, en este proyecto se intentará proporcionar ciertas pautas con respecto a la construcción del prototipo que ayuden a identificar lo que se debe exigir a la hora de implementarlo.
+        </p>
+        
+    </div>
+</body>
+
 </html>

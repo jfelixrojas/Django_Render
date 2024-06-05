@@ -14,39 +14,21 @@
             background-color: #f8f9fa;
         }
 
-        h3{
-            font-family: 'Courier New', Courier, monospace;
-            text-align: center;
-        }
-        h1,  h5 {
+        h3,h2 {
             font-family: 'Courier New', Courier, monospace;
             text-align: center;
         }
 
-        input {
-            text-align: center;
+        h1, h5 {
             font-family: 'Courier New', Courier, monospace;
+            text-align: center;
         }
+
+        
 
         label {
             font-family: 'Courier New', Courier, monospace;
             font-weight: bold;
-        }
-
-        .small-input {
-            width: 4cm;
-        }
-
-        .small-btn {
-            width: 2cm; /* Ajusta el tamaño para que los botones sean iguales */
-        }
-        .full-btn{
-            width: 4cm;
-            box-sizing: border-box;
-        }
-        
-        .mt-2 {
-            margin-top: 0.5rem !important
         }
 
         .status-box {
@@ -58,240 +40,304 @@
             text-align: center;
             margin-top: 0.5rem;
         }
+
         .contador {
             font-weight: bold;
             font-size: 1.2em; /* Puedes ajustar este valor según tu preferencia */
+        }
+
+        .header {
+            background-color: #e4c9c9;
+            color: #fff;
+            padding: 5px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Adjust as needed */
+        }
+
+        .header h1 {
+            margin: 0;
+            color: rgb(128, 12, 237);
+        }
+
+        .header nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+        }
+
+        .header nav ul li {
+            margin-right: 10px;
+        }
+
+        .header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+
+        .header nav ul li a:hover {
+            background-color: #e68484;
+            border-radius: 5px; /* Bordes redondeados */
+        }
+
+        .content {
+            margin-top: 100px; /* Ajusta este valor según el alto de tu header */
+            margin-left: 50px; /* Ajusta este valor según el ancho de tu header */
+            margin-right: 50px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container my-5">
-        <h1 class="text-center text-danger">TOMA DE DATOS</h1>
-        <div class="form-group row justify-content-center">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-1">
-                <label for="muestra" class="col-form-label text-end">Muestra:</label>
+    <div class="header">
+        <h1><a href="/">Aplicación IOT</a></h1>
+        <nav>
+            <ul class="bruh">
+                <li><a href="/" class="link">Inicio</a></li>
+                <li><a href="/data" class="link">Toma de datos</a></li>
+                <li><a href="/visualizacion" class="link">Visualización</a></li>
+                <li><a href="/contact" class="link">Contáctanos</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="content">
+        <div class="container my-5">
+            <h1 class="text-center text-danger">TOMA DE DATOS</h1>
+            <div class="form-group row justify-content-center">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-1">
+                    <label for="muestra" class="col-form-label text-end">Muestra:</label>
+                </div>
+                <div class="col-sm-3">
+                    <h5 class="contador mr-4" id="muestra">{{ Last_Obj.Nro }}</h5>
+                </div>
+                <div class="col-sm-2">
+                    <label for="cant-base" class="col-form-label">Cant. Base:</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control small-input" id="cant-base" placeholder='{{ Cant_Base }}' value='{{ Cant_Base }}'>
+                </div>
+                <div class="col-sm-2"></div> <!-- Columna vacía para centrar -->
             </div>
-            <div class="col-sm-3">
-                <h5 class="contador mr-4" id="muestra">{{ Last_Obj.Nro }}</h5>
-            </div>
-            <div class="col-sm-2">
-                <label for="cant-base" class="col-form-label">Cant. Base:</label>
-            </div>
-            <div class="col-sm-2">
-                <input type="text" class="form-control small-input" id="cant-base" placeholder='{{ Cant_Base }}' value='{{ Cant_Base }}'>
-            </div>
-            <div class="col-sm-2"></div> <!-- Columna vacía para centrar -->
-        </div>
 
 
-        <div class="row text-center">
+            <div class="row text-center">
 
-            <div class="col-sm-4 text-center">
-                <label for="nitrogeno" class="form-label">Nitrógeno</label>
-                <div class="d-flex justify-content-center mb-2">
-                    <input type="text" class="form-control small-input mb-2" id="nitrogeno" placeholder={{ Last_Obj.V_teo_1 }} value={{ Last_Obj.V_teo_1 }}>
-                </div>
-                <div class="btn-group justify-content-center" role="group">
-                    <button class="btn btn-primary small-btn " onclick="incrementar('nitrogeno','cant-base')">+</button>
-                    <button class="btn btn-secondary small-btn "
-                        onclick="decrementar('nitrogeno','cant-base')">-</button>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <button class="btn btn-warning full-btn mt-2"
-                        onclick="resetear('nitrogeno','cant-base')">Null</button>
-                </div>
-            </div>
-            <div class="col-sm-4 text-center">
-                <label for="nitrogeno" class="form-label">Fosforo</label>
-                <div class="d-flex justify-content-center mb-2">
-                    <input type="text" class="form-control small-input mb-2" id="fosforo" placeholder={{ Last_Obj.V_teo_3 }} value={{ Last_Obj.V_teo_3 }}>
-                </div>
-                <div class="btn-group justify-content-center" role="group">
-                    <button class="btn btn-primary small-btn " onclick="incrementar('fosforo','cant-base')">+</button>
-                    <button class="btn btn-secondary small-btn " onclick="decrementar('fosforo','cant-base')">-</button>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <button class="btn btn-warning full-btn mt-2"
-                        onclick="resetear('fosforo','cant-base')">Null</button>
-                </div>
-            </div>
-            <div class="col-sm-4 text-center">
-                <label for="nitrogeno" class="form-label">Potasio</label>
-                <div class="d-flex justify-content-center mb-2">
-                    <input type="text" class="form-control small-input mb-2" id="potasio" placeholder={{ Last_Obj.V_teo_2 }} value={{ Last_Obj.V_teo_2 }}>
-                </div>
-                <div class="btn-group justify-content-center" role="group">
-                    <button class="btn btn-primary small-btn " onclick="incrementar('potasio','cant-base')">+</button>
-                    <button class="btn btn-secondary small-btn " onclick="decrementar('potasio','cant-base')">-</button>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <button class="btn btn-warning full-btn mt-2"
-                        onclick="resetear('potasio','cant-base')">Null</button>
-                </div>
-            </div>
-        </div>
-        <h3 class="text-danger mt-5">Configuraciones Extras</h3>
-        <h5 class="text-primary ">Datos Anteriores</h5>
-
-        <div class="row text-center">
-            <div class="col-sm-6 text-center">
-                <h2>Datos Experimentales</h2>
-                <table border="1" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Nro</th>
-                            <th>Nitrogeno</th>
-                            <th>Fosforo</th>
-                            <th>Potasio</th>
-                            <th>Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <ul>
-                                    {% for val in Datos_Exp.Nro %}
-                                        <p>{{ val }}</p>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    {% for val in Datos_Exp.V_teo_1 %}
-                                        <p>{{ val }}</p>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    {% for val in Datos_Exp.V_teo_2 %}
-                                        <p>{{ val }}</p>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    {% for val in Datos_Exp.V_teo_3 %}
-                                        <p>{{ val }}</p>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    {% for val in Datos_Exp.Fecha %}
-                                        <p>{{ val }}</p>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-sm-6 text-center">
-                <h2>Datos Teoricos</h2>
-                <table border="1" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Nro</th>
-                            <th>Nitrogeno</th>
-                            <th>Fosforo</th>
-                            <th>Potasio</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <ul>
-                                    {% for val in Datos_Teo.Nro %}
-                                        <p>{{ val }}</p>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    {% for val in Datos_Teo.V_teo_1 %}
-                                        <p>{{ val }}</p>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    {% for val in Datos_Teo.V_teo_2 %}
-                                        <p>{{ val }}</p>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                            <td>
-                                <ul>
-                                    {% for val in Datos_Teo.V_teo_3 %}
-                                        <p>{{ val }}</p>
-                                    {% endfor %}
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        
-
-        <div class="row text-center mt-4">
-            <div class="col">
-                <form id="Form_Cargar" action="{% url 'upload page' %}" method="post">
-                    <input type="hidden" name="Muestra" id="muestraInput_Cargar">
-                    <input type="hidden" name="V_teo_1" id="nitrogenoInput_Cargar">
-                    <input type="hidden" name="V_teo_2" id="potasioInput_Cargar">
-                    <input type="hidden" name="V_teo_3" id="fosforoInput_Cargar">
-                    <input type="hidden" name="Valid" id="ValidInput_Cargar" value="True">
-                    <input type="hidden" name="Cant_Base" id="Cant_BaseInput_Cargar" >
-                    <button type="submit" class="btn btn-danger btn-lg w-100" onclick="SubirDatos('Form_Cargar')">Cargar
-                        Dato</button>
-                </form>
-            </div>
-            <div class="col">
-                <div id="rechazado" class="status-box bg-secondary">Rechazado</div>
-            </div>
-            <div class="col">
-                <div id="cargando" class="status-box bg-secondary">Cargando</div>
-            </div>
-            <div class="col">
-                <div id="completado" class="status-box bg-secondary">Completado</div>
-            </div>
-        </div>
-
-        <div class="row text-center justify-content-center mt-5">
-            <div class="col-6 text-center justify-content-center">
-                <div class="d-flex align-items-center">
-                    <form id="Form_Repetir" action="{% url 'upload page' %}" method="post">
-                        <input type="hidden" name="Muestra" id="muestraInput_Repetir">
-                        <input type="hidden" name="V_teo_1" id="nitrogenoInput_Repetir">
-                        <input type="hidden" name="V_teo_2" id="potasioInput_Repetir">
-                        <input type="hidden" name="V_teo_3" id="fosforoInput_Repetir">
-                        <input type="hidden" name="Valid" id="ValidInput_Repetir" value="False">
-                        <input type="hidden" name="Cant_Base" id="Cant_BaseInput_Repetir" >
-                        <button type="submit" class="btn btn-danger btn-lg w-auto mr-2"
-                            onclick="SubirDatos('Form_Repetir')">Repetir</button>
-                    </form>
-                    <form id="Form_Eliminar" action="{% url 'upload page' %}" method="post">
-                        <input type="hidden" name="Muestra" id="muestraInput_Eliminar">
-                        <input type="hidden" name="Valid" id="ValidInput_Eliminar" value="False">
-                        <input type="hidden" name="Delete" id="DeleteInput_Eliminar" value="True">
-                        <input type="hidden" name="Cant_Base" id="Cant_BaseInput_Eliminar" >
-                        <button type="submit" class="btn btn-danger btn-lg w-auto mr-2"
-                            onclick="eliminarDato()">Eliminar</button>
-                    </form>
-
-                    <div class="form-check d-inline-block mx-5">
-                        <input class="form-check-input" type="checkbox" id="actual" name="checkbox-group" checked>
-                        <label class="form-check-label" for="actual">Actual</label>
+                <div class="col-sm-4 text-center">
+                    <label for="nitrogeno" class="form-label">Nitrógeno</label>
+                    <div class="d-flex justify-content-center mb-2">
+                        <input type="text" class="form-control small-input mb-2" id="nitrogeno" placeholder={{ Last_Obj.V_teo_1 }} value={{ Last_Obj.V_teo_1 }}>
                     </div>
-                    <div class="form-check d-flex align-items-center mx-2">
-                        <input class="form-check-input mr-2" type="checkbox" id="diferente" name="checkbox-group">
-                        <label class="form-check-label mr-2" for="diferente"></label>
-                        <input type="text" class="form-control small-input mb-2" id="cuadroTexto" placeholder="Otro"
-                            disabled>
+                    <div class="btn-group justify-content-center" role="group">
+                        <button class="btn btn-primary small-btn " onclick="incrementar('nitrogeno','cant-base')">+</button>
+                        <button class="btn btn-secondary small-btn "
+                            onclick="decrementar('nitrogeno','cant-base')">-</button>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-warning full-btn mt-2"
+                            onclick="resetear('nitrogeno','cant-base')">Null</button>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <label for="nitrogeno" class="form-label">Fosforo</label>
+                    <div class="d-flex justify-content-center mb-2">
+                        <input type="text" class="form-control small-input mb-2" id="fosforo" placeholder={{ Last_Obj.V_teo_3 }} value={{ Last_Obj.V_teo_3 }}>
+                    </div>
+                    <div class="btn-group justify-content-center" role="group">
+                        <button class="btn btn-primary small-btn " onclick="incrementar('fosforo','cant-base')">+</button>
+                        <button class="btn btn-secondary small-btn " onclick="decrementar('fosforo','cant-base')">-</button>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-warning full-btn mt-2"
+                            onclick="resetear('fosforo','cant-base')">Null</button>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <label for="nitrogeno" class="form-label">Potasio</label>
+                    <div class="d-flex justify-content-center mb-2">
+                        <input type="text" class="form-control small-input mb-2" id="potasio" placeholder={{ Last_Obj.V_teo_2 }} value={{ Last_Obj.V_teo_2 }}>
+                    </div>
+                    <div class="btn-group justify-content-center" role="group">
+                        <button class="btn btn-primary small-btn " onclick="incrementar('potasio','cant-base')">+</button>
+                        <button class="btn btn-secondary small-btn " onclick="decrementar('potasio','cant-base')">-</button>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-warning full-btn mt-2"
+                            onclick="resetear('potasio','cant-base')">Null</button>
+                    </div>
+                </div>
+            </div>
+            <h3 class="text-danger mt-5">Configuraciones Extras</h3>
+            <h5 class="text-primary ">Datos Anteriores</h5>
+
+            <div class="row text-center">
+                <div class="col-sm-6 text-center">
+                    <h2>Datos Experimentales</h2>
+                    <table border="1" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Nro</th>
+                                <th>Nitrogeno</th>
+                                <th>Fosforo</th>
+                                <th>Potasio</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <ul>
+                                        {% for val in Datos_Exp.Nro %}
+                                            <p>{{ val }}</p>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        {% for val in Datos_Exp.V_teo_1 %}
+                                            <p>{{ val }}</p>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        {% for val in Datos_Exp.V_teo_2 %}
+                                            <p>{{ val }}</p>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        {% for val in Datos_Exp.V_teo_3 %}
+                                            <p>{{ val }}</p>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        {% for val in Datos_Exp.Fecha %}
+                                            <p>{{ val }}</p>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-6 text-center">
+                    <h2>Datos Teoricos</h2>
+                    <table border="1" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Nro</th>
+                                <th>Nitrogeno</th>
+                                <th>Fosforo</th>
+                                <th>Potasio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <ul>
+                                        {% for val in Datos_Teo.Nro %}
+                                            <p>{{ val }}</p>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        {% for val in Datos_Teo.V_teo_1 %}
+                                            <p>{{ val }}</p>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        {% for val in Datos_Teo.V_teo_2 %}
+                                            <p>{{ val }}</p>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        {% for val in Datos_Teo.V_teo_3 %}
+                                            <p>{{ val }}</p>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+
+            <div class="row text-center mt-4">
+                <div class="col">
+                    <form id="Form_Cargar" action="{% url 'upload page' %}" method="post">
+                        <input type="hidden" name="Muestra" id="muestraInput_Cargar">
+                        <input type="hidden" name="V_teo_1" id="nitrogenoInput_Cargar">
+                        <input type="hidden" name="V_teo_2" id="potasioInput_Cargar">
+                        <input type="hidden" name="V_teo_3" id="fosforoInput_Cargar">
+                        <input type="hidden" name="Valid" id="ValidInput_Cargar" value="True">
+                        <input type="hidden" name="Cant_Base" id="Cant_BaseInput_Cargar" >
+                        <button type="submit" class="btn btn-danger btn-lg w-100" onclick="SubirDatos('Form_Cargar')">Cargar
+                            Dato</button>
+                    </form>
+                </div>
+                <div class="col">
+                    <div id="rechazado" class="status-box bg-secondary">Rechazado</div>
+                </div>
+                <div class="col">
+                    <div id="cargando" class="status-box bg-secondary">Cargando</div>
+                </div>
+                <div class="col">
+                    <div id="completado" class="status-box bg-secondary">Completado</div>
+                </div>
+            </div>
+
+            <div class="row text-center justify-content-center mt-5">
+                <div class="col-6 text-center justify-content-center">
+                    <div class="d-flex align-items-center">
+                        <form id="Form_Repetir" action="{% url 'upload page' %}" method="post" class="d-flex align-items-center">
+                            <input type="hidden" name="Muestra" id="muestraInput_Repetir">
+                            <input type="hidden" name="V_teo_1" id="nitrogenoInput_Repetir">
+                            <input type="hidden" name="V_teo_2" id="potasioInput_Repetir">
+                            <input type="hidden" name="V_teo_3" id="fosforoInput_Repetir">
+                            <input type="hidden" name="Valid" id="ValidInput_Repetir" value="False">
+                            <input type="hidden" name="Cant_Base" id="Cant_BaseInput_Repetir">
+                            
+                            <!-- Botón "Descargar datos" a la izquierda -->
+                            <form action="{% url 'download_data' %}" method="get",class = "d-flex align-items-center">
+                                <button type="submit" class="btn btn-danger btn-lg mr-2">Descargar datos</button>
+                            </form>
+                            
+                            <!-- Botón "Repetir" a la derecha -->
+                            <button type="submit" class="btn btn-danger btn-lg mr-2" onclick="SubirDatos('Form_Repetir')">Repetir</button>
+                        </form>
+                        <form id="Form_Eliminar" action="{% url 'upload page' %}" method="post">
+                            <input type="hidden" name="Muestra" id="muestraInput_Eliminar">
+                            <input type="hidden" name="Valid" id="ValidInput_Eliminar" value="False">
+                            <input type="hidden" name="Delete" id="DeleteInput_Eliminar" value="True">
+                            <input type="hidden" name="Cant_Base" id="Cant_BaseInput_Eliminar" >
+                            <button type="submit" class="btn btn-danger btn-lg w-auto mr-2"
+                                onclick="eliminarDato()">Eliminar</button>
+                        </form>
+
+                        <div class="form-check d-inline-block mx-5">
+                            <input class="form-check-input" type="checkbox" id="actual" name="checkbox-group" checked>
+                            <label class="form-check-label" for="actual">Actual</label>
+                        </div>
+                        <div class="form-check d-flex align-items-center mx-2">
+                            <input class="form-check-input mr-2" type="checkbox" id="diferente" name="checkbox-group">
+                            <label class="form-check-label mr-2" for="diferente"></label>
+                            <input type="text" class="form-control small-input mb-2" id="cuadroTexto" placeholder="Otro"
+                                disabled>
+                        </div>
                     </div>
                 </div>
             </div>
